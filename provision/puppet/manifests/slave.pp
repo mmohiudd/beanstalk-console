@@ -19,14 +19,6 @@ exec {
         command => 'pip install circus-web',
         require => Exec['install libevent-dev', 'install python-pip', 'install circus'];
 
-    'install pip-requirements':
-        command => 'pip install -r /vagrant/provision/pip-requirements.txt',
-        require => Exec['install python-pip'];
-
-    'download stressapptest':
-        command => 'wget -P /vagrant/provision/files/ https://stressapptest.googlecode.com/files/stressapptest-1.0.6_autoconf.tar.gz',
-        creates => '/vagrant/provision/files/stressapptest-1.0.6_autoconf.tar.gz';
-        
     'install stressapptest':
         command => '/vagrant/provision/shell/stressapptest.sh',
         require => File['/vagrant/provision/shell/stressapptest.sh'];

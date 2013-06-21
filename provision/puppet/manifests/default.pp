@@ -21,10 +21,13 @@ exec {
     'install python-setuptools':
         command => 'apt-get -y install python-setuptools';
 
+    'install pip-requirements':
+        command => 'pip install -r /vagrant/provision/pip-requirements.txt',
+        require => Exec['install python-pip'];
+
     'update hosts':
         command => '/vagrant/provision/shell/network.sh',
         require => File['/vagrant/provision/shell/network.sh'];
-
 }
 
 file { 
@@ -34,4 +37,5 @@ file {
         group => "vagrant",
         mode => "0777",
         source => '/vagrant/provision/shell/network.sh';
+
 }

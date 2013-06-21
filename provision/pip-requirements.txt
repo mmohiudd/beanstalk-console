@@ -1,2 +1,4 @@
 iowait>=0.1
 psutil>=0.4.1
+PyYAML>=3.10
+beanstalkc>=0.3.0

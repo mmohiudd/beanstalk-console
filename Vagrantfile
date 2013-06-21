@@ -6,11 +6,7 @@ Vagrant.configure("2") do |config|
   
   config.vm.box_url = "http://files.vagrantup.com/precise64.box"
 
-  # config.vm.provision :shell, :path => "provision/shell/network.sh" # fix all network related things
-  # config.vm.provision :shell, :path => "provision/shell/php.sh" # install php cli
-
-  # config.vm.network :forwarded_port, guest: 81, host: 8181       # nginx
-  # config.vm.network :forwarded_port, guest: 27017, host: 27017   # mongodb
+  config.vm.synced_folder "code/common", "/home/vagrant/common"
   
 
   config.vm.define :master1 do |master1|
