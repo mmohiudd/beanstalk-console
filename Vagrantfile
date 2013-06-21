@@ -19,6 +19,8 @@ Vagrant.configure("2") do |config|
     master1.vm.network :private_network, ip: "192.168.102.111"
     master1.vm.network :private_network, ip: "192.168.102.112"
 
+    slave2.vm.synced_folder "code/producers", "/home/vagrant/producers"
+
     master1.vm.provision :puppet do |puppet|
       puppet.manifests_path = "provision/puppet/manifests"
       puppet.module_path = "provision/puppet/modules"
@@ -30,7 +32,9 @@ Vagrant.configure("2") do |config|
   config.vm.define :slave1 do |slave1|
     slave1.vm.hostname = "slave1"
     slave1.vm.network :private_network, ip: "192.168.102.21"
-
+    
+    slave1.vm.synced_folder "code/workers", "/home/vagrant/workers"
+    
     slave1.vm.provision :puppet do |puppet|
       puppet.manifests_path = "provision/puppet/manifests"
       puppet.module_path = "provision/puppet/modules"
@@ -43,6 +47,8 @@ Vagrant.configure("2") do |config|
     slave2.vm.hostname = "slave2"
     slave2.vm.network :private_network, ip: "192.168.102.22"
     
+    slave2.vm.synced_folder "code/workers", "/home/vagrant/workers"
+
     slave1.vm.provision :puppet do |puppet|
       puppet.manifests_path = "provision/puppet/manifests"
       puppet.module_path = "provision/puppet/modules"
