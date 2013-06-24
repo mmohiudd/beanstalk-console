@@ -13,6 +13,7 @@ Vagrant.configure("2") do |config|
     master1.vm.network :private_network, ip: "192.168.102.11"
     master1.vm.network :private_network, ip: "192.168.102.111"
     master1.vm.network :private_network, ip: "192.168.102.112"
+    master1.vm.network :private_network, ip: "192.168.102.113"
 
     master1.vm.provision :puppet do |puppet|
       puppet.manifests_path = "provision/puppet/manifests"

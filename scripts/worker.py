@@ -2,10 +2,10 @@
 '''
 this script performs the task
 '''
-
-import sys
-import getopt
 import os
+import sys
+import json
+import getopt
 import beanstalkc
 
 
@@ -17,7 +17,7 @@ def perform(*args, **kwargs):
     m = kwargs.get("m", 1)
 
     command = "stressapptest -M %s -s %s -m %s" % (M, s, m)
-
+    print "performing %s " % (command)
     retvalue = os.system(command)
 
     print retvalue
@@ -59,11 +59,16 @@ def main(argv):
         sys.exit(2)
 
     while True:
-        beanstalk.watch(tube)  # start watching
-        beanstalk.ignore("default")  # stop watching default
-        job = beanstalk.reserve()  # reseve the job
-        print job.body
-        job.delete()
+        try:
+            print "started %s " % (tube)
+            beanstalk.watch(tube)  # start watching
+            beanstalk.ignore("default")  # stop watching default
+            job = beanstalk.reserve()  # reseve the job
+            job_data = json.loads(job.body)
+            perform(**job_data)
+            job.delete()
+        except KeyboardInterrupt:
+            break
 
 if __name__ == "__main__":
     main(sys.argv[1:])

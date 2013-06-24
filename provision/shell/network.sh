@@ -14,6 +14,8 @@ echo "192.168.102.111	master1.1" >> /etc/hosts
 sed -i '/'master1.2'$/ d' /etc/hosts
 echo "192.168.102.112	master1.2" >> /etc/hosts
 
+sed -i '/'master1.3'$/ d' /etc/hosts
+echo "192.168.102.113	master1.3" >> /etc/hosts
 
 sed -i '/'slave1'$/ d' /etc/hosts
 echo "192.168.102.21	slave1" >> /etc/hosts
