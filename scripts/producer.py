@@ -1,6 +1,6 @@
 #!/usr/bin/python
 '''
-this script performs the task
+this script prodices the task
 '''
 
 import sys
@@ -59,11 +59,8 @@ def main(argv):
         sys.exit(2)
 
     while True:
-        beanstalk.watch(tube)  # start watching
-        beanstalk.ignore("default")  # stop watching default
-        job = beanstalk.reserve()  # reseve the job
-        print job.body
-        job.delete()
+        # start putting jobs here
+        print 1
 
 if __name__ == "__main__":
     main(sys.argv[1:])
